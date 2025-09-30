@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio tecnico</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* VARIABLES GLOBALES */
+        :root {
+            --primary-color: #00bcd4; /* Cyan */
+            --secondary-color: #24d854; /* Verde WhatsApp (Botón de contacto) */
+            --accent-color: #4caf50; /* Verde Checks */
+            --dev-color: #9c27b0; /* Púrpura Programación */
+            --dark-bg: #10101a;
+            --card-bg: #3c2624; /* COLOR DE TARJETA ACTUALIZADO */
+            --light-text: #e0e0e0;
+
+            /* Colores para el efecto neón */
+            --neon-color1: #ff00ff; /* Magenta */
+            --neon-color2: #00ffff; /* Aqua */
+            --neon-color3: #ffdd00; /* Amarillo brillante */
+        }
+
+        /* ESTILOS BASE Y CONTROL DE SCROLL */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow-x: hidden; 
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .ad-container {
+            width: 100%;
+            max-width: 1200px; 
+            padding: 20px;
+            background: linear-gradient(145deg, #4b4b6f, #10101a);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- LOGO EN SU PROPIA SECCIÓN ARRIBA Y A LA DERECHA --- */
+        .logo-header-section {
+            display: flex;
+            justify-content: flex-end; 
+            width: 100%;
+            margin-bottom: 20px; 
+            perspective: 1000px; /* Para el efecto 3D */
+        }
+
+        .logo-container {
+            flex-shrink: 0;
+            width: 150px; 
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            border-radius: 50%;
+            
+            /* --- EFECTO GIRATORIO Y NEÓN --- */
+            animation: 
+                rotateLogo 10s linear infinite, /* Animación de rotación */
+                neonPulse 1.5s ease-in-out infinite alternate; /* Animación del brillo neón */
+            
+            /* Sombra inicial de neón (se animará en neonPulse) */
+            box-shadow: 
+                0 0 10px var(--neon-color1),
+                0 0 20px var(--neon-color2),
+                0 0 30px var(--neon-color3);
+            /* --- FIN EFECTO --- */
+        }
+
+        /* KEYFRAMES PARA LA ROTACIÓN */
+        @keyframes rotateLogo {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* KEYFRAMES PARA EL EFECTO NEÓN PULSANTE */
+        @keyframes neonPulse {
+            0% {
+                box-shadow: 
+                    0 0 5px var(--neon-color1),
+                    0 0 15px var(--neon-color2),
+                    0 0 25px var(--neon-color3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 15px var(--neon-color1),
+                    0 0 30px var(--neon-color2),
+                    0 0 45px var(--neon-color3);
+            }
+            100% {
+                box-shadow: 
+                    0 0 5px var(--neon-color1),
+                    0 0 15px var(--neon-color2),
+                    0 0 25px var(--neon-color3);
+            }
+        }
+        
+        /* --- TÍTULOS (Ahora centrados bajo el logo) --- */
+        .header-titles {
+            text-align: center;
+            margin-bottom: 30px; 
+            margin-top: -100px; /* SUBE los títulos para llenar el espacio del logo */
+        }
+        
+        .main-title {
+            color: var(--primary-color);
+            font-size: 2.5em; 
+            margin-top: 0;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        .subtitle {
+            color: #bdbdbd;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+        
+        /* --- GRUPO DE 3 TARJETAS SUPERIORES --- */
+        .services-grid-top {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            flex: 1 1 280px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        /* --- SECCIÓN INFERIOR: URGENCIAS Y CONTACTO --- */
+        .bottom-section {
+            text-align: center;
+        }
+        
+        .urgent-problems-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px 30px;
+            margin: 0 auto 20px; 
+            max-width: 800px;
+            text-align: left;
+            border-left: 5px solid #ef4444; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Contenedor del botón de contacto y el ícono de WhatsApp */
+        .contact-group {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente el grupo */
+            align-items: center; /* Centra verticalmente los elementos */
+            gap: 15px; /* Espacio entre el botón grande y el ícono */
+        }
+
+        /* Estilos de Contacto (Botón grande) */
+        .contact-info {
+            background: var(--secondary-color);
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: 900;
+            color: var(--dark-bg);
+            text-decoration: none;
+            flex-shrink: 0; /* Evita que el botón se achique */
+            text-align: center;
+        }
+
+        /* Estilo del ícono de WhatsApp (Pequeño, al lado del botón) */
+        .whatsapp-inline-icon {
+            display: block; 
+            flex-shrink: 0; 
+        }
+        .whatsapp-inline-icon img {
+            width: 60px; 
+            height: 60px;
+            border-radius: 50%; 
+            border: 3px solid var(--secondary-color); 
+            box-shadow: 0 0 10px rgba(36, 216, 84, 0.8);
+            transition: transform 0.2s;
+        }
+        .whatsapp-inline-icon img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Colores, logos, y listas */
+        .card-title { font-size: 1.3em; padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid var(--primary-color); }
+        .systems-card .card-title { color: #facc15; border-bottom-color: #facc15; } 
+        .software-card .card-title { color: #3b82f6; border-bottom-color: #3b82f6; }
+        .dev-card .card-title { color: var(--dev-color); border-bottom-color: var(--dev-color); }
+        .dev-card { border-left-color: var(--dev-color); }
+        
+        /* --- TAMAÑO GRANDE EN PC: PROGRAM LOGOS (55px) --- */
+        .program-logo { 
+            width: 55px; 
+            height: 55px; 
+            background-color: #37474f; 
+            border-radius: 5px; 
+            object-fit: contain; 
+        }
+        
+        .program-logo.dev { background-color: #4a148c; }
+        .logo-row { display: flex; gap: 10px; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px dashed #424242; }
+        .service-list { list-style: none; padding: 0; margin: 0; }
+        .service-list li { margin-bottom: 5px; padding-left: 20px; position: relative; font-size: 0.9em; color: #d1d5db; }
+        .service-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-color); font-weight: bold; }
+        .urgent-problems-card .card-title { color: #ef4444; border-bottom-color: #ef4444; display: flex; align-items: center; gap: 10px; }
+        .urgent-problems-card .card-title::before { content: '🚨'; font-size: 1.2em; }
+        .highlight-li { font-weight: bold; color: var(--secondary-color); }
+        .highlight-li::before { content: '🚨'; color: var(--secondary-color); }
+
+        /* ================================================= */
+        /* === MEDIA QUERIES PARA MÓVILES (CAPTURA SIN SCROLL) === */
+        /* ================================================= */
+        @media (max-width: 992px) {
+            /* MODO FULLSCREEN EN MÓVIL */
+            body, html { height: 100%; overflow: hidden; }
+            body { align-items: flex-start; padding: 10px; }
+            .ad-container {
+                height: 100vh; 
+                max-width: 600px;
+                border-radius: 0;
+                padding: 15px 10px;
+                overflow-y: auto; 
+            }
+            
+            /* Logo centrado arriba */
+            .logo-header-section { justify-content: center; margin-bottom: 15px; }
+            .logo-container { width: 100px; height: 100px; }
+            
+            /* Títulos y contenido apilado */
+            .header-titles { margin-top: 0; margin-bottom: 15px; }
+            .main-title { font-size: 1.8em; }
+            .subtitle { font-size: 0.9em; }
+            
+            .services-grid-top { flex-direction: column; gap: 10px; }
+            .service-card { flex-basis: 100%; }
+            
+            /* Ajuste de Contacto en Móvil */
+            .contact-group {
+                flex-direction: column; /* Apila el botón y el ícono en móvil */
+                gap: 10px;
+            }
+            .contact-info { 
+                font-size: 1.2em; 
+                padding: 15px 20px;
+                width: 100%; /* El botón ocupa todo el ancho */
+                box-sizing: border-box; 
+            }
+            .whatsapp-inline-icon {
+                 order: -1; /* Pone el icono arriba del botón grande en móvil */
+            }
+            .whatsapp-inline-icon img {
+                width: 50px; /* Tamaño del icono en móvil */
+                height: 50px;
+                border-width: 2px;
+            }
+            
+            /* Ajuste de logos de programas en móvil */
+            .program-logo {
+                width: 45px; 
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ad-container">
+        
+        <div class="logo-header-section">
+            <div class="logo-container">
+                <img src="logo.jpg" alt="Logo de la empresa" class="logo-image">
+            </div>
+        </div>
+        
+        <div class="header-titles">
+            <h1 class="main-title">🛠️ ¡Servicio tecnico y desarrollo web! 💻</h1>
+            <h2 class="subtitle">Soluciones soporte tecnico, desarrollo Web y Sistemas presencial y remoto.</h2>
+        </div>
+        
+        <div class="services-grid-top">
+            
+            <div class="service-card dev-card">
+                <p class="card-title">🌐 Programación y Sistemas</p>
+                <div class="logo-row">
+                    <img src="web.png" alt="Icono Desarrollo Web" class="program-logo dev">
+                    <img src="api.png" alt="Icono API" class="program-logo dev">
+                    <img src="escritorio.jpg" alt="Icono Escritorio" class="program-logo dev">
+                </div>
+                <ul class="service-list">
+                    <li>Creación de Páginas Web y Sistemas Web modernos.</li>
+                    <li>Desarrollo de Sistemas de Escritorio.</li>
+                    <li>Diseño e implementación de APIs.</li>
+                </ul>
+            </div>
+            
+            <div class="service-card systems-card">
+                <p class="card-title">🚀 Optimización y Mantenimiento</p>
+                <div class="logo-row">
+                    <img src="win11.png" alt="Logo Windows 11" class="program-logo">
+                    <img src="win10.png" alt="Icono Windows 10" class="program-logo">
+                </div>
+                <ul class="service-list">
+                    <li>Instalación de Windows 10/11 limpia y optimizada.</li>
+                    <li>Formateo de equipos para máximo rendimiento.</li>
+                    <li>Mantenimiento completo (limpieza interna).</li>
+                </ul>
+            </div>
+            
+            <div class="service-card software-card">
+                <p class="card-title">💡 Software y Licencias</p>
+                <div class="logo-row">
+                    <img src="photoshop.png" alt="Logo Adobe Photoshop" class="program-logo">
+                    <img src="office.jpg" alt="Logo Microsoft Office" class="program-logo">
+                    <img src="gta.png" alt="Icono de Videojuegos o GTA" class="program-logo">
+                </div>
+                <ul class="service-list">
+                    <li>Instalación de Photoshop, AutoCAD, y más.</li>
+                    <li>Activación de Licencia de Microsoft Office.</li>
+                    <li>Instalación de Videojuegos y programas.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="urgent-problems-card">
+                <p class="card-title">Solución de Problemas Urgentes</p>
+                <ul class="service-list">
+                    <li class="highlight-li">DESBLOQUEO DE CONTRASEÑAS ¡SIN BORRAR NADA!</li>
+                    <li>Eliminación total de Virus y software malicioso.</li>
+                    <li>Reparación de errores, lentitud extrema y pantallas azules.</li>
+                </ul>
+            </div>
+            
+            <div class="contact-group">
+                
+                <a href="tel:979743940" class="contact-info">
+                    📞 ¡Llama o WhatsApp Ahora! 📞 <br> **979 743 940 - 935 499 990**
+                </a>
+
+                <a href="https://wa.me/51979743940" class="whatsapp-inline-icon" target="_blank" rel="noopener noreferrer">
+                    <img src="whatsapp.jpg" alt="WhatsApp">
+                </a>
+
+            </div>
+            </div>
+        
+    </div>
+
+</body>
+</html>
